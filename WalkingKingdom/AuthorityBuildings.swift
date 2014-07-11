@@ -15,10 +15,17 @@ class TownHall:AuthorityBuilding {
     
         super.init()
         name = "Town Hall"
-        image = UIImage(named: "TownHall.png")
+        imageName = "TownHall.png"
+        image = UIImage(named: imageName)
         
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 300
     }
+    
+    init(coder aDecoder: NSCoder!) {
+        
+        super.init(coder:aDecoder)
+    }
+
 }
 

@@ -25,8 +25,16 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         map?.setUserTrackingMode(MKUserTrackingMode.Follow,animated:true)
         game = Game.sharedGame()
         inforLabel.text = "💰 \(game?.coin) ⚡️ \(game?.energy)"
+        
         NSNotificationCenter.defaultCenter().addObserver(
             self, selector: "coinOrEnergyChanging:", name: "coinOrEnergyChanging", object: nil)
+        
+        for building in game!.buildings {
+            
+            var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
+            buildingAnnation.building = building
+            map?.addAnnotation(buildingAnnation)
+        }
         
         var gesture = UITapGestureRecognizer(target:self, action: (selector: "clickOnMap:"))
         map?.addGestureRecognizer(gesture)
@@ -64,10 +72,12 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func buildABuilding(building:Building) {
     
+        //game?.buildings.removeAll(keepCapacity: true)
         building.location = location
         var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
         buildingAnnation.building = building
         map?.addAnnotation(buildingAnnation)
+        game?.buildings.append(building)
     }
     
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
@@ -104,9 +114,11 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         } else if (annotation.isKindOfClass(BuildingAnnotation)) {
         
             var buildingAV = MKAnnotationView(annotation:annotation, reuseIdentifier:"Building")
+            NSLog("%f,%f", annotation.coordinate.latitude,annotation.coordinate.longitude)
             var buildingAnnotation = annotation as BuildingAnnotation
-            buildingAV.image = buildingAnnotation.building?.image!
-            NSLog("%@", buildingAV.image!)
+            buildingAV.image = UIImage(named: buildingAnnotation.building?.imageName)
+            var building = buildingAnnotation.building
+            NSLog("%@", buildingAV)
             return buildingAV
         }
         return nil

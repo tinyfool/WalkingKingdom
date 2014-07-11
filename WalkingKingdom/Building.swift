@@ -12,8 +12,9 @@ import MapKit
 
 class Building:NSObject,NSCoding {
 
-    var buildTime:NSDate
+    var buildTime:NSDate?
     var image:UIImage?
+    var imageName:String = ""
     var radius = 50
     var name = ""
     var location:CLLocationCoordinate2D?
@@ -23,20 +24,34 @@ class Building:NSObject,NSCoding {
     func encodeWithCoder(aCoder: NSCoder!) {
         
         aCoder.encodeObject(buildTime, forKey:"buildTime")
-        aCoder.encodeObject(image, forKey: "image")
+        aCoder.encodeObject(imageName, forKey: "imageName")
         aCoder.encodeInteger(radius, forKey: "radius")
         aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(NSValue(MKCoordinate: location!), forKey: "location")
+        if(location) {
+            
+            aCoder.encodeDouble(location!.latitude, forKey: "lat")
+            aCoder.encodeDouble(location!.longitude, forKey: "long")
+        }
     }
     
     init(coder aDecoder: NSCoder!) {
         
-        buildTime = aDecoder.decodeObjectForKey("buildTime") as NSDate
-        image = aDecoder.decodeObjectForKey("image") as? UIImage
+        buildTime = aDecoder.decodeObjectForKey("buildTime") as? NSDate
+        var tempimageName = aDecoder.decodeObjectForKey("imageName") as? String
+        if(tempimageName) {
+        
+            imageName = tempimageName!
+        }
+        
         radius = aDecoder.decodeIntegerForKey("radius")
-        name = aDecoder.decodeObjectForKey("name") as String
-        var locationValue = aDecoder.decodeObjectForKey("location") as NSValue
-        location = locationValue.MKCoordinateValue()
+        var name1 = aDecoder.decodeObjectForKey("name") as? String
+        if(name1) {
+
+            name = name1!
+        }
+        var lat = aDecoder.decodeDoubleForKey("lat")
+        var long = aDecoder.decodeDoubleForKey("long")
+        location = CLLocationCoordinate2DMake(lat, long)
         buildingRequirement = BuildingRequirement()
     }
 
@@ -66,6 +81,7 @@ class House:Building {
     
     override func encodeWithCoder(aCoder: NSCoder!) {
         
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(lastCollectTime, forKey: "lastCollectTime")
     }
     
@@ -74,6 +90,7 @@ class House:Building {
         lastCollectTime = NSDate.date()
         super.init()
     }
+    
     init(coder aDecoder: NSCoder!) {
         
         lastCollectTime = aDecoder.decodeObjectForKey("lastCollectTime") as? NSDate
@@ -88,6 +105,13 @@ class AuthorityBuilding:House {
     
         super.init()
     }
+    
+    
+    init(coder aDecoder: NSCoder!) {
+        
+        super.init(coder:aDecoder)
+    }
+
 }
 
 class MaterialBuilding:Building {
@@ -95,11 +119,6 @@ class MaterialBuilding:Building {
     var workPlans = NSDictionary()
     var working:Workplan?
     var startTime:NSDate?
-    
-    override func encodeWithCoder(aCoder: NSCoder!) {
-        
-        
-    }
     
     init(coder aDecoder: NSCoder!) {
         

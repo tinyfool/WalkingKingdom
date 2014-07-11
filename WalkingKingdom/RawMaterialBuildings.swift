@@ -15,10 +15,16 @@ class Farm : MaterialBuilding {
     
         super.init()
         name = "Farm"
-        image = UIImage(named: "Farm.png")
+        imageName = "Farm.png"
+        image = UIImage(named: imageName)
         
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 75
         buildingRequirement.buildingCost["wood"] = 50
+    }
+    
+    init(coder aDecoder: NSCoder!) {
+    
+        super.init(coder:aDecoder)
     }
 }

@@ -108,11 +108,13 @@ class Game :NSObject,NSCoding {
         }
         
         buildings = aDecoder.decodeObjectForKey("buildings") as [Building]
+        
+        NSLog("%@", buildings)
     }
 
     func notifyChange() {
         
-        NSNotificationCenter.defaultCenter().postNotificationName("coinOrEnergyChanging",object:self)
+    NSNotificationCenter.defaultCenter().postNotificationName("coinOrEnergyChanging",object:self)
     }
     
     func todayStepCollected() ->Int {
@@ -187,7 +189,6 @@ class Game :NSObject,NSCoding {
     
     func buildABuilding(building:Building) {
     
-        //checkingBuildingPossible(AuthorityBuilding)
     }
     
     func checkingBuildingPossible(building:Building) -> Bool {
