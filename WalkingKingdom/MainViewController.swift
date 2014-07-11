@@ -16,15 +16,32 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     var annotation:MKAnnotation?
     var location:CLLocationCoordinate2D?
     
-    @IBOutlet var inforLabel: UILabel
+    @IBOutlet var infoView: UIView
+    @IBOutlet var infoView2: UIView
+    @IBOutlet var moneyLabel: UILabel
+    @IBOutlet var woodLabel: UILabel
+    @IBOutlet var lumberLabel: UILabel
+    @IBOutlet var rockLabel: UILabel
+    @IBOutlet var cutstoneLabel: UILabel
+    @IBOutlet var wheatLabel: UILabel
+    @IBOutlet var woolLabel: UILabel
+    @IBOutlet var clothLabel: UILabel
+    @IBOutlet var peopleAndEnergyLabel: UILabel
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        infoView.layer.borderWidth = 1
+        infoView.layer.opacity = 0.7
+        infoView2.layer.borderWidth = 1
+        infoView2.layer.opacity = 0.7
+
+        
         map?.setUserTrackingMode(MKUserTrackingMode.Follow,animated:true)
         game = Game.sharedGame()
-        inforLabel.text = "💰 \(game?.coin) ⚡️ \(game?.energy)"
+        
+        updateInfoView()
         
         NSNotificationCenter.defaultCenter().addObserver(
             self, selector: "coinOrEnergyChanging:", name: "coinOrEnergyChanging", object: nil)
@@ -97,7 +114,24 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func coinOrEnergyChanging(notice:NSNotification) {
         
-        inforLabel.text = "💰 \(game?.coin) ⚡️ \(game?.energy)"
+        updateInfoView()
+    }
+    
+    func updateInfoView() {
+    
+        dispatch_async(dispatch_get_main_queue(), {
+
+            self.moneyLabel.text     = "💰 \(self.game?.coin)"
+            self.woodLabel.text      = "🌲 \(self.game?.wood)"
+            self.lumberLabel.text    = "✏ \(self.game?.lumber)"
+            self.rockLabel.text      = "🗿 \(self.game?.rock)"
+            self.cutstoneLabel.text  = "📏 \(self.game?.cutstone)"
+            self.wheatLabel.text     = "🍚 \(self.game?.wheat)"
+            self.woolLabel.text      = "🐑 \(self.game?.wool)"
+            self.clothLabel.text     = "👔 \(self.game?.cloth)"
+            self.peopleAndEnergyLabel.text
+                = "👨 \(self.game?.people) ⚡️ \(self.game?.energy)"
+        })
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {

@@ -23,6 +23,8 @@ class Game :NSObject,NSCoding {
     var cloth:Int = 0
     var exp:Int = 0
     
+    var people = 0
+    
     var level = 1
     
     var stepCollected:Dictionary<NSDate,Int>
@@ -35,6 +37,7 @@ class Game :NSObject,NSCoding {
             static var game: Game? = nil
             static var onceToken: dispatch_once_t = 0
         }
+        
         dispatch_once(&Static.onceToken) {
             
             var url:NSURL = Game.saveUrl()
@@ -83,8 +86,10 @@ class Game :NSObject,NSCoding {
         
         aCoder.encodeInteger(exp, forKey: "exp")
         aCoder.encodeInteger(level, forKey: "level")
+        aCoder.encodeInteger(people, forKey: "people")
         
         aCoder.encodeObject(buildings, forKey: "buildings")
+        
     }
     
     init(coder aDecoder: NSCoder!) {
@@ -106,6 +111,7 @@ class Game :NSObject,NSCoding {
         if(level<1) {
             level = 1
         }
+        people = aDecoder.decodeIntegerForKey("people")
         
         buildings = aDecoder.decodeObjectForKey("buildings") as [Building]
         
