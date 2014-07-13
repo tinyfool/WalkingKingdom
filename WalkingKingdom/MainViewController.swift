@@ -89,12 +89,14 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func buildABuilding(building:Building) {
     
-        //game?.buildings.removeAll(keepCapacity: true)
-        building.location = location
-        var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
-        buildingAnnation.building = building
-        map?.addAnnotation(buildingAnnation)
-        game?.buildings.append(building)
+        if(game?.checkingBuildingPossible(building)) {
+            
+            building.location = location
+            var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
+            buildingAnnation.building = building
+            map?.addAnnotation(buildingAnnation)
+            game?.buildings.append(building)
+        }
     }
     
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {

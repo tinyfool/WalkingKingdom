@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Game :NSObject,NSCoding {
 
@@ -206,8 +207,92 @@ class Game :NSObject,NSCoding {
             }
         }
         
-        
+        var br = building.buildingRequirement
+        for (cost,amount) in br.buildingCost {
+            
+            var message:NSString
+            
+            switch(cost) {
+            
+                case "coin":
+                    if(amount>self.coin) {
+                        
+                        message = "need 💰 \(amount) and you only have 💰 \(self.coin)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "wood":
+                    if(amount>self.wood) {
+                    
+                        message = "need 🌲 \(amount) coin and you only have 🌲 \(self.wood)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "lumber":
+                    if(amount>self.lumber) {
+                    
+                        message = "need ✏ \(amount) and you only have ✏ \(self.lumber)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "rock":
+                    if(amount>self.rock) {
+                    
+                        message = "need 🗿 \(amount) coin and you only have 🗿 \(self.rock)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "cutstone":
+                    if(amount>self.cutstone) {
+                    
+                        message = "need 📏 \(amount) and you only have 📏 \(self.cutstone)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "wheat":
+                    if(amount>self.wheat) {
+                    
+                        message = "need 🍚 \(amount) coin and you only have 🍚 \(self.wheat)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "wool":
+                    if(amount>self.wool) {
+                    
+                        message = "need 🐑 \(amount) and you only have 🐑 \(self.wool)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                case "cloth":
+                    if(amount>self.cloth) {
+                    
+                        message = "need 👔 \(amount) coin and you only have 👔 \(self.cloth)"
+                        alertForBuildingRequirement(message)
+                        return false
+                    }
+                
+                default:
+                    NSLog("%@", cost)
+            }
+        }
         return false
+    }
+    
+    func alertForBuildingRequirement(message:NSString) {
+    
+        var alert = UIAlertView(
+            title: "You can't build!",
+            message: message,
+            delegate: nil,
+            cancelButtonTitle: "Ok")
+        alert.show()
     }
     
     func checkingAuthorityBuildingExisted() -> Bool {
