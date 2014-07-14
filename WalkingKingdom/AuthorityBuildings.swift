@@ -26,6 +26,11 @@ class TownHall:AuthorityBuilding {
         
         super.init(coder:aDecoder)
     }
+    
+    override func buildResult(game: Game) {
+        
+        
+    }
 
 }
 

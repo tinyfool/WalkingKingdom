@@ -18,6 +18,7 @@ class Farm : MaterialBuilding {
         imageName = "Farm.png"
         image = UIImage(named: imageName)
         
+        buildingRequirement.needPeople = 4
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 75
         buildingRequirement.buildingCost["wood"] = 50

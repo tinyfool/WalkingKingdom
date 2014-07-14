@@ -61,6 +61,9 @@ class Building:NSObject,NSCoding {
         buildingRequirement = BuildingRequirement()
     }
  
+    func buildResult(game:Game) {
+    
+    }
 }
 
 class BuildingRequirement:NSObject {

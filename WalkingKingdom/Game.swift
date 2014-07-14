@@ -200,24 +200,29 @@ class Game :NSObject,NSCoding {
     
     func checkingBuildingPossible(building:Building) -> Bool {
         
+        
+        var message:NSString
+
         if(building.isKindOfClass(AuthorityBuilding)) {
             
             if(checkingAuthorityBuildingExisted()) {
+                
+                message = "You already have an Authority Building, you can only update it, can't build more."
+                alertForBuildingRequirement(message)
                 return false
             }
         }
         
+    
         var br = building.buildingRequirement
         for (cost,amount) in br.buildingCost {
-            
-            var message:NSString
             
             switch(cost) {
             
                 case "coin":
                     if(amount>self.coin) {
                         
-                        message = "need 💰 \(amount) and you only have 💰 \(self.coin)"
+                        message = "Need 💰 \(amount) and you only have 💰 \(self.coin)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -225,7 +230,7 @@ class Game :NSObject,NSCoding {
                 case "wood":
                     if(amount>self.wood) {
                     
-                        message = "need 🌲 \(amount) coin and you only have 🌲 \(self.wood)"
+                        message = "Need 🌲 \(amount) coin and you only have 🌲 \(self.wood)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -233,7 +238,7 @@ class Game :NSObject,NSCoding {
                 case "lumber":
                     if(amount>self.lumber) {
                     
-                        message = "need ✏ \(amount) and you only have ✏ \(self.lumber)"
+                        message = "Need ✏ \(amount) and you only have ✏ \(self.lumber)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -241,7 +246,7 @@ class Game :NSObject,NSCoding {
                 case "rock":
                     if(amount>self.rock) {
                     
-                        message = "need 🗿 \(amount) coin and you only have 🗿 \(self.rock)"
+                        message = "Need 🗿 \(amount) coin and you only have 🗿 \(self.rock)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -249,7 +254,7 @@ class Game :NSObject,NSCoding {
                 case "cutstone":
                     if(amount>self.cutstone) {
                     
-                        message = "need 📏 \(amount) and you only have 📏 \(self.cutstone)"
+                        message = "Need 📏 \(amount) and you only have 📏 \(self.cutstone)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -257,7 +262,7 @@ class Game :NSObject,NSCoding {
                 case "wheat":
                     if(amount>self.wheat) {
                     
-                        message = "need 🍚 \(amount) coin and you only have 🍚 \(self.wheat)"
+                        message = "Need 🍚 \(amount) coin and you only have 🍚 \(self.wheat)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -265,7 +270,7 @@ class Game :NSObject,NSCoding {
                 case "wool":
                     if(amount>self.wool) {
                     
-                        message = "need 🐑 \(amount) and you only have 🐑 \(self.wool)"
+                        message = "Need 🐑 \(amount) and you only have 🐑 \(self.wool)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -273,7 +278,7 @@ class Game :NSObject,NSCoding {
                 case "cloth":
                     if(amount>self.cloth) {
                     
-                        message = "need 👔 \(amount) coin and you only have 👔 \(self.cloth)"
+                        message = "Need 👔 \(amount) coin and you only have 👔 \(self.cloth)"
                         alertForBuildingRequirement(message)
                         return false
                     }
@@ -284,6 +289,48 @@ class Game :NSObject,NSCoding {
         }
         return false
     }
+    
+    func makeBuildingCost(building:Building) -> Bool {
+        
+        var br = building.buildingRequirement
+        self.people -= br.needPeople
+        self.exp += br.exp
+        
+        for (cost,amount) in br.buildingCost {
+            
+            switch(cost) {
+                
+            case "coin":
+                self.coin -= amount;
+                
+            case "wood":
+                self.wood -= amount;
+                
+            case "lumber":
+                self.lumber -= amount;
+
+            case "rock":
+                self.rock -= amount;
+
+            case "cutstone":
+                self.cutstone -= amount;
+                
+            case "wheat":
+                self.wheat -= amount;
+                
+            case "wool":
+                self.wool -= amount;
+                
+            case "cloth":
+                self.cloth -= amount;
+                
+            default:
+                NSLog("%@", cost)
+            }
+        }
+        return false
+    }
+
     
     func alertForBuildingRequirement(message:NSString) {
     

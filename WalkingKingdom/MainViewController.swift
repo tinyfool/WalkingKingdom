@@ -40,7 +40,8 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         
         map?.setUserTrackingMode(MKUserTrackingMode.Follow,animated:true)
         game = Game.sharedGame()
-        
+        //game?.buildings.removeAll(keepCapacity: true)
+            
         updateInfoView()
         
         NSNotificationCenter.defaultCenter().addObserver(
@@ -89,7 +90,8 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func buildABuilding(building:Building) {
     
-        if(game?.checkingBuildingPossible(building)) {
+        var canBuild = game?.checkingBuildingPossible(building)
+        if(canBuild!) {
             
             building.location = location
             var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
