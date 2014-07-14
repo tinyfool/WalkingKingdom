@@ -40,8 +40,8 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         
         map?.setUserTrackingMode(MKUserTrackingMode.Follow,animated:true)
         game = Game.sharedGame()
-        //game?.buildings.removeAll(keepCapacity: true)
-            
+//        game?.buildings.removeAll(keepCapacity: true)
+        
         updateInfoView()
         
         NSNotificationCenter.defaultCenter().addObserver(

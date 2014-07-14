@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD3986041973C148002C58A0 /* Houses.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3986031973C148002C58A0 /* Houses.swift */; };
 		BD782342196D1A1A002FFAAE /* BuildingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */; };
 		BD782344196E2519002FFAAE /* RawMaterialBuildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782343196E2519002FFAAE /* RawMaterialBuildings.swift */; };
 		BD782346196E252E002FFAAE /* AdvancedMaterialBuildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782345196E252E002FFAAE /* AdvancedMaterialBuildings.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD3986031973C148002C58A0 /* Houses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Houses.swift; sourceTree = "<group>"; };
 		BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingsTableViewController.swift; sourceTree = "<group>"; };
 		BD782343196E2519002FFAAE /* RawMaterialBuildings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMaterialBuildings.swift; sourceTree = "<group>"; };
 		BD782345196E252E002FFAAE /* AdvancedMaterialBuildings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedMaterialBuildings.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */,
 				BD92ABD1196913E2008AF677 /* Game.swift */,
 				BDAEF870196A3747009CD9EC /* Building.swift */,
+				BD3986031973C148002C58A0 /* Houses.swift */,
 				BDAEF872196A43C3009CD9EC /* AuthorityBuildings.swift */,
 				BD782343196E2519002FFAAE /* RawMaterialBuildings.swift */,
 				BD782345196E252E002FFAAE /* AdvancedMaterialBuildings.swift */,
@@ -242,6 +245,7 @@
 			files = (
 				BD782342196D1A1A002FFAAE /* BuildingsTableViewController.swift in Sources */,
 				BD782348196E253F002FFAAE /* Shops.swift in Sources */,
+				BD3986041973C148002C58A0 /* Houses.swift in Sources */,
 				BD782346196E252E002FFAAE /* AdvancedMaterialBuildings.swift in Sources */,
 				BDAAFACF1967B05A00F627EF /* AppDelegate.swift in Sources */,
 				BDFDF26F1968F5F500D68976 /* CollecterViewController.swift in Sources */,
