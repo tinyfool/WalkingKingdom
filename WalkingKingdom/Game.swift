@@ -121,7 +121,7 @@ class Game :NSObject,NSCoding {
 
     func notifyChange() {
         
-    NSNotificationCenter.defaultCenter().postNotificationName("coinOrEnergyChanging",object:self)
+        NSNotificationCenter.defaultCenter().postNotificationName("coinOrEnergyChanging",object:self)
     }
     
     func todayStepCollected() ->Int {
@@ -216,8 +216,15 @@ class Game :NSObject,NSCoding {
             }
         }
         
-    
         var br = building.buildingRequirement
+        
+        if(br.needPeople > people) {
+        
+            message = "Need more people, make more house..."
+            alertForBuildingRequirement(message)
+            return false
+        }
+        
         for (cost,amount) in br.buildingCost {
             
             switch(cost) {
