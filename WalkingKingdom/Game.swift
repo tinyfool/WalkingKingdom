@@ -196,6 +196,9 @@ class Game :NSObject,NSCoding {
     
     func buildABuilding(building:Building) {
     
+        makeBuildingCost(building)
+        building.buildResult(self)
+        buildings.append(building)
     }
     
     func checkingBuildingPossible(building:Building) -> Bool {
@@ -287,7 +290,7 @@ class Game :NSObject,NSCoding {
                     NSLog("%@", cost)
             }
         }
-        return false
+        return true
     }
     
     func makeBuildingCost(building:Building) -> Bool {

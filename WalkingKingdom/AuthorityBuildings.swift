@@ -29,7 +29,7 @@ class TownHall:AuthorityBuilding {
     
     override func buildResult(game: Game) {
         
-        
+        game.people += 20
     }
 
 }

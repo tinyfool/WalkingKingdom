@@ -94,10 +94,14 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         if(canBuild!) {
             
             building.location = location
+            
+            game?.buildABuilding(building)
+            
             var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
             buildingAnnation.building = building
             map?.addAnnotation(buildingAnnation)
-            game?.buildings.append(building)
+            
+            updateInfoView()
         }
     }
     
