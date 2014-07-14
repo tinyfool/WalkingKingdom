@@ -29,3 +29,18 @@ class Farm : MaterialBuilding {
         super.init(coder:aDecoder)
     }
 }
+
+class LoggingCamp : MaterialBuilding {
+
+    init() {
+    
+        super.init()
+        name = "Logging Camp"
+        imageName = "LoggingCamp.png"
+        image = UIImage(named: imageName)
+
+        buildingRequirement.needPeople = 4
+        buildingRequirement.exp = 200
+        buildingRequirement.buildingCost["coin"] = 100
+    }
+}

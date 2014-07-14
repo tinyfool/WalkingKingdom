@@ -17,6 +17,7 @@ class BuildingsTableViewController : UITableViewController {
         
         buildings = []
         buildings.append(TownHall())
+        buildings.append(LoggingCamp())
         buildings.append(Farm())
         super.init(coder: aDecoder)
     }

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 pei hao. All rights reserved.
 //
 
+// http://tradenations.wikia.com/wiki/Trade_Nations_Wiki
 import Foundation
 import UIKit
 import MapKit
