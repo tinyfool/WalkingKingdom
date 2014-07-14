@@ -25,6 +25,7 @@ class Game :NSObject,NSCoding {
     var exp:Int = 0
     
     var people = 0
+    var usedPeople = 0
     
     var level = 1
     
@@ -87,8 +88,10 @@ class Game :NSObject,NSCoding {
         
         aCoder.encodeInteger(exp, forKey: "exp")
         aCoder.encodeInteger(level, forKey: "level")
-        aCoder.encodeInteger(people, forKey: "people")
         
+        aCoder.encodeInteger(people, forKey: "people")
+        aCoder.encodeInteger(usedPeople, forKey: "usedPeople")
+
         aCoder.encodeObject(buildings, forKey: "buildings")
         
     }
@@ -113,6 +116,7 @@ class Game :NSObject,NSCoding {
             level = 1
         }
         people = aDecoder.decodeIntegerForKey("people")
+        usedPeople = aDecoder.decodeIntegerForKey("usedPeople")
         
         buildings = aDecoder.decodeObjectForKey("buildings") as [Building]
         
@@ -218,7 +222,7 @@ class Game :NSObject,NSCoding {
         
         var br = building.buildingRequirement
         
-        if(br.needPeople > people) {
+        if(br.needPeople > people - usedPeople) {
         
             message = "Need more people, make more house..."
             alertForBuildingRequirement(message)
@@ -303,7 +307,7 @@ class Game :NSObject,NSCoding {
     func makeBuildingCost(building:Building) -> Bool {
         
         var br = building.buildingRequirement
-        self.people -= br.needPeople
+        self.usedPeople += br.needPeople
         self.exp += br.exp
         
         for (cost,amount) in br.buildingCost {

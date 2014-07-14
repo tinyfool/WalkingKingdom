@@ -43,4 +43,9 @@ class LoggingCamp : MaterialBuilding {
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 100
     }
+    
+    init(coder aDecoder: NSCoder!) {
+    
+        super.init(coder: aDecoder)
+    }
 }

@@ -138,7 +138,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             self.woolLabel.text      = "🐑 \(self.game?.wool)"
             self.clothLabel.text     = "👔 \(self.game?.cloth)"
             self.peopleAndEnergyLabel.text
-                = "👨 \(self.game?.people) ⚡️ \(self.game?.energy)"
+                = "👨 \(self.game?.usedPeople)/\(self.game?.people) ⚡️ \(self.game?.energy)"
         })
     }
     
