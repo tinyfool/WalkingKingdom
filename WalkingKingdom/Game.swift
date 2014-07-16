@@ -201,7 +201,6 @@ class Game :NSObject,NSCoding {
     func buildABuilding(building:Building) {
     
         makeBuildingCost(building)
-        building.buildResult(self)
         buildings.append(building)
     }
     

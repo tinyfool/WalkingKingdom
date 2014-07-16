@@ -70,6 +70,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
                 var view = annotation.buildingView?
                 view?.updateStatus()
             }
+            updateInfoView()
         }
     }
     

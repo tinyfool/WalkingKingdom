@@ -40,7 +40,7 @@ class BuildingAnnotationView : MKAnnotationView {
         if(building){
         
             var theBuilding = building!
-            
+            var game = Game.sharedGame()
             if(theBuilding.complete==0) {
                 
                 NSLog("%d", theBuilding.buildCostTime)
@@ -53,6 +53,7 @@ class BuildingAnnotationView : MKAnnotationView {
                     
                     theBuilding.complete = 1
                     buildingLabel.hidden = true
+                    theBuilding.buildResult(game)
                 }
             }else {
                 
