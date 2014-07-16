@@ -95,13 +95,24 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         var gesture:UITapGestureRecognizer = sender as UITapGestureRecognizer
         var point = gesture.locationInView(gesture.view)
         
-        location = map?.convertPoint(point, toCoordinateFromView:map)
-        self.annotation = MenuAnnotation(coordinate:location!)
-        map?.addAnnotation(annotation)
+        if(map) {
+            var theMap:MKMapView = map!
+            
+            var hitView = theMap.hitTest(point, withEvent: nil)
+            if(hitView.isKindOfClass(MKAnnotationView)){
+            
+                return
+            }
+            
+            location = theMap.convertPoint(point, toCoordinateFromView:map)
+            self.annotation = MenuAnnotation(coordinate:location!)
+            theMap.addAnnotation(annotation)
+            
+            var menu = UIActionSheet(title: "build", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Build")
+            menu.showInView(self.view)
+        }else {
         
-        var menu = UIActionSheet(title: "build", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Build")
-        
-        menu.showInView(self.view)
+        }
     }
     
     func buildABuilding(building:Building) {
@@ -181,6 +192,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             buildingAV.building = building!
             buildingAV.image = UIImage(named: buildingAnnotation.building?.imageName)
             NSLog("%@", buildingAV)
+            buildingAV.canShowCallout = true
             buildingAV.updateStatus()
             buildingAnnotation.buildingView = buildingAV
             return buildingAV
@@ -214,5 +226,17 @@ class BuildingAnnotation:NSObject,MKAnnotation {
     init(coordinate:CLLocationCoordinate2D) {
         
         self.coordinate  = coordinate
+    }
+    var title: String! {
+    
+        get {
+            if(building) {
+                return building?.name
+            }
+            else {
+            
+                return ""
+            }
+        }
     }
 }
