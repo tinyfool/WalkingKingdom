@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BD3986041973C148002C58A0 /* Houses.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3986031973C148002C58A0 /* Houses.swift */; };
+		BD3986061973DF32002C58A0 /* BuildingAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3986051973DF32002C58A0 /* BuildingAnnotationView.swift */; };
 		BD782342196D1A1A002FFAAE /* BuildingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */; };
 		BD782344196E2519002FFAAE /* RawMaterialBuildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782343196E2519002FFAAE /* RawMaterialBuildings.swift */; };
 		BD782346196E252E002FFAAE /* AdvancedMaterialBuildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD782345196E252E002FFAAE /* AdvancedMaterialBuildings.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		BD3986031973C148002C58A0 /* Houses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Houses.swift; sourceTree = "<group>"; };
+		BD3986051973DF32002C58A0 /* BuildingAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingAnnotationView.swift; sourceTree = "<group>"; };
 		BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingsTableViewController.swift; sourceTree = "<group>"; };
 		BD782343196E2519002FFAAE /* RawMaterialBuildings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawMaterialBuildings.swift; sourceTree = "<group>"; };
 		BD782345196E252E002FFAAE /* AdvancedMaterialBuildings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedMaterialBuildings.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				BDAAFACE1967B05A00F627EF /* AppDelegate.swift */,
 				BDAAFAD01967B05A00F627EF /* MainViewController.swift */,
+				BD3986051973DF32002C58A0 /* BuildingAnnotationView.swift */,
 				BDFDF26E1968F5F500D68976 /* CollecterViewController.swift */,
 				BD782341196D1A1A002FFAAE /* BuildingsTableViewController.swift */,
 				BD92ABD1196913E2008AF677 /* Game.swift */,
@@ -254,6 +257,7 @@
 				BD92ABD2196913E2008AF677 /* Game.swift in Sources */,
 				BDAEF873196A43C3009CD9EC /* AuthorityBuildings.swift in Sources */,
 				BD782344196E2519002FFAAE /* RawMaterialBuildings.swift in Sources */,
+				BD3986061973DF32002C58A0 /* BuildingAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

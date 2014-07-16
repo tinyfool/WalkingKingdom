@@ -20,6 +20,7 @@ class TownHall:AuthorityBuilding {
         
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 300
+        buildingRequirement.buildCostTime = 100
     }
     
     init(coder aDecoder: NSCoder!) {

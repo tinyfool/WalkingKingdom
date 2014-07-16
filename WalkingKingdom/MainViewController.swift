@@ -56,8 +56,23 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         
         var gesture = UITapGestureRecognizer(target:self, action: (selector: "clickOnMap:"))
         map?.addGestureRecognizer(gesture)
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
 
+    func update() {
+    
+        if(map) {
+        
+            var theMap = map!
+            for annotation in theMap.annotations {
+            
+                var view = annotation.buildingView?
+                view?.updateStatus()
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         
         super.didReceiveMemoryWarning()
@@ -148,20 +163,27 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         
             var user = MKPinAnnotationView(annotation:annotation!, reuseIdentifier:"userlocation")
             return user
+            
         } else if (annotation.isKindOfClass(MenuAnnotation)) {
             
             var menu = MKAnnotationView(annotation:annotation, reuseIdentifier:"Menu")
             menu.image = UIImage(named:"crown.png")
             return menu
+            
         } else if (annotation.isKindOfClass(BuildingAnnotation)) {
         
-            var buildingAV = MKAnnotationView(annotation:annotation, reuseIdentifier:"Building")
-            NSLog("%f,%f", annotation.coordinate.latitude,annotation.coordinate.longitude)
             var buildingAnnotation = annotation as BuildingAnnotation
-            buildingAV.image = UIImage(named: buildingAnnotation.building?.imageName)
             var building = buildingAnnotation.building
+            var buildingAV = BuildingAnnotationView(
+                    annotation:annotation,
+                    reuseIdentifier:"Building")
+            buildingAV.building = building!
+            buildingAV.image = UIImage(named: buildingAnnotation.building?.imageName)
             NSLog("%@", buildingAV)
+            buildingAV.updateStatus()
+            buildingAnnotation.buildingView = buildingAV
             return buildingAV
+            
         }
         return nil
     }
@@ -187,6 +209,7 @@ class BuildingAnnotation:NSObject,MKAnnotation {
 
     var coordinate: CLLocationCoordinate2D
     var building:Building?
+    var buildingView:BuildingAnnotationView?
     init(coordinate:CLLocationCoordinate2D) {
         
         self.coordinate  = coordinate

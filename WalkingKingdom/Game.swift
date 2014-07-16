@@ -309,6 +309,7 @@ class Game :NSObject,NSCoding {
         var br = building.buildingRequirement
         self.usedPeople += br.needPeople
         self.exp += br.exp
+        building.buildCostTime = building.buildingRequirement.buildCostTime
         
         for (cost,amount) in br.buildingCost {
             

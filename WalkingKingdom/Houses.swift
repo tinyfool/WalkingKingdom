@@ -20,6 +20,7 @@ class SmallHouse : House {
         
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 100
+        buildingRequirement.buildCostTime = 100
     }
     
     init(coder aDecoder: NSCoder!) {

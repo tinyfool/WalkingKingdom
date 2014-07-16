@@ -14,11 +14,15 @@ import MapKit
 class Building:NSObject,NSCoding {
 
     var buildTime:NSDate?
+    
+    var buildCostTime:Int
+    
     var image:UIImage?
     var imageName:String = ""
     var radius = 50
     var name = ""
     var location:CLLocationCoordinate2D?
+    var complete = 0
     
     var buildingRequirement:BuildingRequirement
     
@@ -33,6 +37,9 @@ class Building:NSObject,NSCoding {
             aCoder.encodeDouble(location!.latitude, forKey: "lat")
             aCoder.encodeDouble(location!.longitude, forKey: "long")
         }
+        
+        aCoder.encodeInteger(complete, forKey: "complete")
+        aCoder.encodeInteger(buildCostTime, forKey: "buildCostTime")
     }
     
     init(coder aDecoder: NSCoder!) {
@@ -54,12 +61,16 @@ class Building:NSObject,NSCoding {
         var long = aDecoder.decodeDoubleForKey("long")
         location = CLLocationCoordinate2DMake(lat, long)
         buildingRequirement = BuildingRequirement()
+        
+        complete = aDecoder.decodeIntegerForKey("complete")
+        buildCostTime = aDecoder.decodeIntegerForKey("buildCostTime")
     }
 
     init(){
         
         buildTime = NSDate.date()
         buildingRequirement = BuildingRequirement()
+        buildCostTime = 0
     }
  
     func buildResult(game:Game) {
@@ -71,7 +82,7 @@ class BuildingRequirement:NSObject {
 
     var levelRequired = 1
     var buildingCost:Dictionary<String,Int> = Dictionary<String,Int>()
-    var buildingTime = 0
+    var buildCostTime = 300
     var radius = 50
     var exp = 0
     var needPeople = 0

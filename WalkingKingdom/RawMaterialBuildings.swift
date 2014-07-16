@@ -22,6 +22,7 @@ class Farm : MaterialBuilding {
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 75
         buildingRequirement.buildingCost["wood"] = 50
+        buildingRequirement.buildCostTime = 300
     }
     
     init(coder aDecoder: NSCoder!) {
@@ -42,6 +43,7 @@ class LoggingCamp : MaterialBuilding {
         buildingRequirement.needPeople = 4
         buildingRequirement.exp = 200
         buildingRequirement.buildingCost["coin"] = 100
+        buildingRequirement.buildCostTime = 100
     }
     
     init(coder aDecoder: NSCoder!) {
