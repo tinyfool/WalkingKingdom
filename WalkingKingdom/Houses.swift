@@ -11,7 +11,7 @@ import UIKit
 
 class SmallHouse : House {
     
-    init() {
+    override init() {
         
         super.init()
         name = "Small House"
@@ -23,7 +23,7 @@ class SmallHouse : House {
         buildingRequirement.buildCostTime = 100
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }

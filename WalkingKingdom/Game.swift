@@ -43,16 +43,16 @@ class Game :NSObject,NSCoding {
         dispatch_once(&Static.onceToken) {
             
             var url:NSURL = Game.saveUrl()
-            if(NSFileManager.defaultManager().fileExistsAtPath(url.path)) {
+            if(NSFileManager.defaultManager().fileExistsAtPath(url.path!)) {
                 
                 NSLog("%@", url)
                 var data = NSData.dataWithContentsOfURL(url, options: .DataReadingMappedIfSafe, error: nil)
                 NSLog("%@", data)
                 var object:AnyObject? =  NSKeyedUnarchiver.unarchiveObjectWithData(data)
-                if(object) {
+                if((object) != nil) {
                     
                     Static.game = object! as? Game
-                    if(!Static.game) {
+                    if((Static.game) == nil) {
                         Static.game = self()
                     }
                 }else {
@@ -66,13 +66,13 @@ class Game :NSObject,NSCoding {
         return Static.game!
     }
     
-    @required init() {
+    required override init() {
         
         stepCollected = Dictionary<NSDate,Int>()
         buildings = []
     }
     
-    func encodeWithCoder(aCoder: NSCoder!) {
+    func encodeWithCoder(aCoder: NSCoder) {
         
         aCoder.encodeObject(stepCollected, forKey: "stepCollected")
         aCoder.encodeInteger(energy, forKey: "energy")
@@ -96,7 +96,7 @@ class Game :NSObject,NSCoding {
         
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         stepCollected = aDecoder.decodeObjectForKey("stepCollected") as Dictionary<NSDate,Int>
         energy = aDecoder.decodeIntegerForKey("energy")
@@ -138,7 +138,7 @@ class Game :NSObject,NSCoding {
     func initStepCollectedTodayIfNeed() {
     
         var today = Game.dayZeroOclock(NSDate.date())
-        if(!stepCollected[today]) {
+        if(stepCollected.indexForKey(today)==nil) {
             stepCollected[today] = 0
         }
     }
@@ -195,7 +195,7 @@ class Game :NSObject,NSCoding {
         dateComponents.minute = 0
         dateComponents.second = 0
         var zeroDate = calendar.dateFromComponents(dateComponents)
-        return zeroDate
+        return zeroDate!
     }
     
     func buildABuilding(building:Building) {

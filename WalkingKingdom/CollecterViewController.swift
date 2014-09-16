@@ -11,11 +11,11 @@ import CoreMotion
 
 class CollecterViewController: UIViewController {
 
-    @IBOutlet var CountingLabel: UILabel
-    @IBOutlet var alreadyLabel: UILabel
-    @IBOutlet var remainLabel: UILabel
-    @IBOutlet var inforLabel: UILabel
-    @IBOutlet var loading: UILabel
+    @IBOutlet var CountingLabel: UILabel?
+    @IBOutlet var alreadyLabel: UILabel?
+    @IBOutlet var remainLabel: UILabel?
+    @IBOutlet var inforLabel: UILabel?
+    @IBOutlet var loading: UILabel?
     
     var motionActivityMgr: CMMotionActivityManager?
     var pedometer: CMPedometer?
@@ -24,7 +24,7 @@ class CollecterViewController: UIViewController {
     var game:Game
 
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         game = Game.sharedGame()
         motionActivityMgr = CMMotionActivityManager()
@@ -89,7 +89,7 @@ class CollecterViewController: UIViewController {
             toQueue: NSOperationQueue.mainQueue(),
             withHandler:{activities, error in
                 
-                if(error) {
+                if((error) != nil) {
                     
                 } else {
                     
@@ -97,7 +97,7 @@ class CollecterViewController: UIViewController {
                         toDate: toDate,
                         withHandler: {data, error in
                             
-                            if(error) {
+                            if((error) != nil) {
                                 
                             }else {
                                 
@@ -105,7 +105,7 @@ class CollecterViewController: UIViewController {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     
                                     NSLog("%@", data)
-                                    self.loading.hidden = true
+                                    self.loading!.hidden = true
                                     self.updateLabels()
                                     })
                             }
@@ -150,12 +150,12 @@ class CollecterViewController: UIViewController {
     
     func updateLabels() {
     
-        self.CountingLabel.text = "\(self.step) 👣"
-        inforLabel.text = "💰 \(game.coin) ⚡️ \(game.energy)"
+        self.CountingLabel!.text = "\(self.step) 👣"
+        inforLabel!.text = "💰 \(game.coin) ⚡️ \(game.energy)"
         var alreadyCollect = game.todayStepCollected()
         var remainSteps = self.step - alreadyCollect
-        alreadyLabel.text = "Already collect \(alreadyCollect) 👣"
-        remainLabel.text = "Reamin \(remainSteps) 👣"
+        alreadyLabel!.text = "Already collect \(alreadyCollect) 👣"
+        remainLabel!.text = "Reamin \(remainSteps) 👣"
     }
     
 }

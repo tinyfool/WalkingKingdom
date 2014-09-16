@@ -26,13 +26,13 @@ class Building:NSObject,NSCoding {
     
     var buildingRequirement:BuildingRequirement
     
-    func encodeWithCoder(aCoder: NSCoder!) {
+    func encodeWithCoder(aCoder: NSCoder) {
         
-        aCoder.encodeObject(buildTime, forKey:"buildTime")
+        aCoder.encodeObject(buildTime!, forKey:"buildTime")
         aCoder.encodeObject(imageName, forKey: "imageName")
         aCoder.encodeInteger(radius, forKey: "radius")
         aCoder.encodeObject(name, forKey: "name")
-        if(location) {
+        if((location) != nil) {
             
             aCoder.encodeDouble(location!.latitude, forKey: "lat")
             aCoder.encodeDouble(location!.longitude, forKey: "long")
@@ -42,18 +42,18 @@ class Building:NSObject,NSCoding {
         aCoder.encodeInteger(buildCostTime, forKey: "buildCostTime")
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         buildTime = aDecoder.decodeObjectForKey("buildTime") as? NSDate
         var tempimageName = aDecoder.decodeObjectForKey("imageName") as? String
-        if(tempimageName) {
+        if((tempimageName) != nil) {
         
             imageName = tempimageName!
         }
         
         radius = aDecoder.decodeIntegerForKey("radius")
         var name1 = aDecoder.decodeObjectForKey("name") as? String
-        if(name1) {
+        if((name1) != nil) {
 
             name = name1!
         }
@@ -66,7 +66,7 @@ class Building:NSObject,NSCoding {
         buildCostTime = aDecoder.decodeIntegerForKey("buildCostTime")
     }
 
-    init(){
+    override init(){
         
         buildTime = NSDate.date()
         buildingRequirement = BuildingRequirement()
@@ -94,19 +94,19 @@ class House:Building {
     var hourTax = 0
     var lastCollectTime:NSDate?
     
-    override func encodeWithCoder(aCoder: NSCoder!) {
+    override func encodeWithCoder(aCoder: NSCoder) {
         
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(lastCollectTime, forKey: "lastCollectTime")
+        aCoder.encodeObject(lastCollectTime!, forKey: "lastCollectTime")
     }
     
-    init() {
+    override init() {
     
         lastCollectTime = NSDate.date()
         super.init()
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required  init(coder aDecoder: NSCoder) {
         
         lastCollectTime = aDecoder.decodeObjectForKey("lastCollectTime") as? NSDate
         super.init(coder:aDecoder)
@@ -116,13 +116,13 @@ class House:Building {
 class AuthorityBuilding:House {
     
     
-    init() {
+    override init() {
     
         super.init()
     }
     
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }
@@ -135,12 +135,12 @@ class MaterialBuilding:Building {
     var working:Workplan?
     var startTime:NSDate?
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }
     
-    init() {
+    override init() {
         
         super.init()
     }
@@ -153,12 +153,12 @@ class Workplan:NSObject,NSCoding {
     var production = ""
     var productionAmount = 0
     var produceTime = 0
-    
-    func encodeWithCoder(aCoder: NSCoder!) {
+
+    func encodeWithCoder(aCoder: NSCoder) {
         
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
     }
 }

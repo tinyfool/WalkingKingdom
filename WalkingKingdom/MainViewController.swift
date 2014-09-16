@@ -16,26 +16,26 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     var annotation:MKAnnotation?
     var location:CLLocationCoordinate2D?
     
-    @IBOutlet var infoView: UIView
-    @IBOutlet var infoView2: UIView
-    @IBOutlet var moneyLabel: UILabel
-    @IBOutlet var woodLabel: UILabel
-    @IBOutlet var lumberLabel: UILabel
-    @IBOutlet var rockLabel: UILabel
-    @IBOutlet var cutstoneLabel: UILabel
-    @IBOutlet var wheatLabel: UILabel
-    @IBOutlet var woolLabel: UILabel
-    @IBOutlet var clothLabel: UILabel
-    @IBOutlet var peopleAndEnergyLabel: UILabel
+    @IBOutlet var infoView: UIView?
+    @IBOutlet var infoView2: UIView?
+    @IBOutlet var moneyLabel: UILabel?
+    @IBOutlet var woodLabel: UILabel?
+    @IBOutlet var lumberLabel: UILabel?
+    @IBOutlet var rockLabel: UILabel?
+    @IBOutlet var cutstoneLabel: UILabel?
+    @IBOutlet var wheatLabel: UILabel?
+    @IBOutlet var woolLabel: UILabel?
+    @IBOutlet var clothLabel: UILabel?
+    @IBOutlet var peopleAndEnergyLabel: UILabel?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        infoView.layer.borderWidth = 1
-        infoView.layer.opacity = 0.7
-        infoView2.layer.borderWidth = 1
-        infoView2.layer.opacity = 0.7
+        infoView!.layer.borderWidth = 1
+        infoView!.layer.opacity = 0.7
+        infoView2!.layer.borderWidth = 1
+        infoView2!.layer.opacity = 0.7
 
         
         map?.setUserTrackingMode(MKUserTrackingMode.Follow,animated:true)
@@ -62,7 +62,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
 
     func update() {
     
-        if(map) {
+        if((map) != nil) {
         
             var theMap = map!
             for annotation in theMap.annotations {
@@ -95,11 +95,11 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         var gesture:UITapGestureRecognizer = sender as UITapGestureRecognizer
         var point = gesture.locationInView(gesture.view)
         
-        if(map) {
+        if((map) != nil) {
             var theMap:MKMapView = map!
             
             var hitView = theMap.hitTest(point, withEvent: nil)
-            if(hitView.isKindOfClass(MKAnnotationView)){
+            if(hitView!.isKindOfClass(MKAnnotationView)){
             
                 return
             }
@@ -141,7 +141,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             return
         }
         
-        var nav = self.storyboard.instantiateViewControllerWithIdentifier("BuildingsTableViewController") as UINavigationController
+        var nav = self.storyboard!.instantiateViewControllerWithIdentifier("BuildingsTableViewController") as UINavigationController
         var table = nav.topViewController as BuildingsTableViewController
         table.main = self
         self.presentViewController(nav , animated: true, completion: nil)
@@ -156,15 +156,15 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
         dispatch_async(dispatch_get_main_queue(), {
 
-            self.moneyLabel.text     = "💰 \(self.game?.coin)"
-            self.woodLabel.text      = "🌲 \(self.game?.wood)"
-            self.lumberLabel.text    = "✏ \(self.game?.lumber)"
-            self.rockLabel.text      = "🗿 \(self.game?.rock)"
-            self.cutstoneLabel.text  = "📏 \(self.game?.cutstone)"
-            self.wheatLabel.text     = "🍚 \(self.game?.wheat)"
-            self.woolLabel.text      = "🐑 \(self.game?.wool)"
-            self.clothLabel.text     = "👔 \(self.game?.cloth)"
-            self.peopleAndEnergyLabel.text
+            self.moneyLabel!.text     = "💰 \(self.game?.coin)"
+            self.woodLabel!.text      = "🌲 \(self.game?.wood)"
+            self.lumberLabel!.text    = "✏ \(self.game?.lumber)"
+            self.rockLabel!.text      = "🗿 \(self.game?.rock)"
+            self.cutstoneLabel!.text  = "📏 \(self.game?.cutstone)"
+            self.wheatLabel!.text     = "🍚 \(self.game?.wheat)"
+            self.woolLabel!.text      = "🐑 \(self.game?.wool)"
+            self.clothLabel!.text     = "👔 \(self.game?.cloth)"
+            self.peopleAndEnergyLabel!.text
                 = "👨 \(self.game?.usedPeople)/\(self.game?.people) ⚡️ \(self.game?.energy)"
         })
     }
@@ -190,7 +190,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
                     annotation:annotation,
                     reuseIdentifier:"Building")
             buildingAV.building = building!
-            buildingAV.image = UIImage(named: buildingAnnotation.building?.imageName)
+            buildingAV.image = UIImage(named: buildingAnnotation.building!.imageName)
             NSLog("%@", buildingAV)
             buildingAV.canShowCallout = true
             buildingAV.updateStatus()
@@ -230,7 +230,7 @@ class BuildingAnnotation:NSObject,MKAnnotation {
     var title: String! {
     
         get {
-            if(building) {
+            if((building) != nil) {
                 return building?.name
             }
             else {

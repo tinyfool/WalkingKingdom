@@ -11,7 +11,7 @@ import UIKit
 
 class Farm : MaterialBuilding {
     
-    init() {
+    override init() {
     
         super.init()
         name = "Farm"
@@ -25,7 +25,7 @@ class Farm : MaterialBuilding {
         buildingRequirement.buildCostTime = 300
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
     
         super.init(coder:aDecoder)
     }
@@ -33,7 +33,7 @@ class Farm : MaterialBuilding {
 
 class LoggingCamp : MaterialBuilding {
 
-    init() {
+    override init() {
     
         super.init()
         name = "Logging Camp"
@@ -46,7 +46,7 @@ class LoggingCamp : MaterialBuilding {
         buildingRequirement.buildCostTime = 100
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
     
         super.init(coder: aDecoder)
     }

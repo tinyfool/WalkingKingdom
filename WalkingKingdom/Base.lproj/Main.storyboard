@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pv-A4-QxB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pv-A4-QxB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Unknown constraint types" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xHB-zy-jck">
@@ -362,6 +362,9 @@
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="BUf-eb-DaV"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <include reference="wlh-QK-RNc"/>
                                         <include reference="zTn-I5-zU8"/>
@@ -369,11 +372,6 @@
                                         <include reference="NNU-kJ-eMY"/>
                                         <include reference="b3Q-OE-A7D"/>
                                         <include reference="wIc-Ns-OaJ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="subviews">
-                                        <include reference="BUf-eb-DaV"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -404,6 +402,10 @@
                                 <exclude reference="qLc-06-8Uz"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Epp-4k-sqw"/>
+                                <exclude reference="R7l-gV-aiy"/>
+                                <exclude reference="INJ-df-zZJ"/>
+                                <exclude reference="t7k-OF-DcX"/>
                                 <exclude reference="8mr-Cn-9VU"/>
                                 <exclude reference="AtG-SJ-Uxd"/>
                                 <exclude reference="DVT-Jn-UHJ"/>
@@ -413,14 +415,19 @@
                                 <exclude reference="tdM-x9-mL3"/>
                                 <exclude reference="9Sx-Hs-Vol"/>
                                 <exclude reference="bKr-2T-k9d"/>
-                                <exclude reference="Epp-4k-sqw"/>
-                                <exclude reference="R7l-gV-aiy"/>
-                                <exclude reference="INJ-df-zZJ"/>
-                                <exclude reference="t7k-OF-DcX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="SEI-9I-Y5u"/>
+                                <include reference="iUL-ha-B1v"/>
+                                <include reference="qLc-06-8Uz"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="Epp-4k-sqw"/>
+                                <include reference="R7l-gV-aiy"/>
+                                <include reference="INJ-df-zZJ"/>
+                                <include reference="t7k-OF-DcX"/>
                                 <include reference="8mr-Cn-9VU"/>
                                 <include reference="AtG-SJ-Uxd"/>
                                 <include reference="DVT-Jn-UHJ"/>
@@ -430,17 +437,6 @@
                                 <exclude reference="tdM-x9-mL3"/>
                                 <include reference="9Sx-Hs-Vol"/>
                                 <exclude reference="bKr-2T-k9d"/>
-                                <include reference="Epp-4k-sqw"/>
-                                <include reference="R7l-gV-aiy"/>
-                                <include reference="INJ-df-zZJ"/>
-                                <include reference="t7k-OF-DcX"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="SEI-9I-Y5u"/>
-                                <include reference="iUL-ha-B1v"/>
-                                <include reference="qLc-06-8Uz"/>
                             </mask>
                         </variation>
                     </view>
@@ -473,7 +469,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sC4-qz-7ot"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nhN-oO-S7M">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypq-39-qki">
@@ -701,12 +697,12 @@
         <scene sceneID="U5r-bD-mJQ">
             <objects>
                 <tableViewController id="Kgs-SO-aLX" customClass="BuildingsTableViewController" customModule="WalkingKingdom" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="187" sectionHeaderHeight="22" sectionFooterHeight="22" id="06N-uk-qJr">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="187" sectionHeaderHeight="22" sectionFooterHeight="22" id="06N-uk-qJr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuildingCell" rowHeight="187" id="yZc-wg-du9" customClass="BuildingDescriptionCell" customModule="WalkingKingdom" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BuildingCell" rowHeight="187" id="yZc-wg-du9" customClass="BuildingDescriptionCell" customModule="WalkingKingdom" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yZc-wg-du9" id="xPm-sK-yYW">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -858,9 +854,6 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
-                        <variation key="widthClass=compact" ambiguous="YES">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        </variation>
                         <connections>
                             <outlet property="dataSource" destination="Kgs-SO-aLX" id="cLM-Ij-bYV"/>
                             <outlet property="delegate" destination="Kgs-SO-aLX" id="Q6v-YJ-L6E"/>

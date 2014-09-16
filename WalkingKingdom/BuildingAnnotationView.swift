@@ -15,7 +15,7 @@ class BuildingAnnotationView : MKAnnotationView {
     var building:Building?
     var buildingLabel:UILabel
     
-    init(annotation: MKAnnotation!, reuseIdentifier: String!) {
+    override init(annotation: MKAnnotation!, reuseIdentifier: String!) {
         
         buildingLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
 
@@ -28,16 +28,20 @@ class BuildingAnnotationView : MKAnnotationView {
         
     }
     
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         
         buildingLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
         super.init(frame:frame)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     
     func updateStatus() {
     
-        if(building){
+        if((building) != nil){
         
             var theBuilding = building!
             var game = Game.sharedGame()

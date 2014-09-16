@@ -11,7 +11,7 @@ import UIKit
 
 class TownHall:AuthorityBuilding {
 
-    init() {
+    override init() {
     
         super.init()
         name = "Town Hall"
@@ -23,7 +23,7 @@ class TownHall:AuthorityBuilding {
         buildingRequirement.buildCostTime = 100
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }

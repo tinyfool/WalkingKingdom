@@ -13,7 +13,7 @@ class BuildingsTableViewController : UITableViewController {
     var buildings:[Building]
     var main:MainViewController?
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         
         buildings = []
         buildings.append(TownHall())
@@ -30,33 +30,35 @@ class BuildingsTableViewController : UITableViewController {
     
 //MARK: DataSource
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
         return buildings.count
     }
     
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
         var cellIdentifier = "BuildingCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as BuildingDescriptionCell
         
         var building:Building = buildings[indexPath.row]
         
-        cell.buildingImage.image = building.image
-        cell.nameLabel.text = building.name
+        cell.buildingImage!.image = building.image
+        cell.nameLabel!.text = building.name
         cell.setBuildingRequestment(building.buildingRequirement)
         
         return cell
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
     }
 
 
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         var building = self.buildings[indexPath.row]
         var buildingClass = building.classForCoder as NSObject.Type
@@ -70,15 +72,15 @@ class BuildingsTableViewController : UITableViewController {
 
 class BuildingDescriptionCell : UITableViewCell {
 
-    @IBOutlet var nameLabel: UILabel
-    @IBOutlet var buildingImage: UIImageView
-    @IBOutlet var levelLabel: UILabel
-    @IBOutlet var radiusLabel: UILabel
+    @IBOutlet var nameLabel: UILabel?
+    @IBOutlet var buildingImage: UIImageView?
+    @IBOutlet var levelLabel: UILabel?
+    @IBOutlet var radiusLabel: UILabel?
     
     func setBuildingRequestment(buildingRequirement:BuildingRequirement) {
     
-        levelLabel.text = "Level \(buildingRequirement.levelRequired)"
-        radiusLabel.text = "Radius \(buildingRequirement.radius)"
+        levelLabel!.text = "Level \(buildingRequirement.levelRequired)"
+        radiusLabel!.text = "Radius \(buildingRequirement.radius)"
         
         var i = 1
         

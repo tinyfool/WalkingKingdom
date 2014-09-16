@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					BDAAFAC81967B05A00F627EF = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = BMC43J69VA;
 					};
 					BDAAFADC1967B05A00F627EF = {
 						CreatedOnToolsVersion = 6.0;
