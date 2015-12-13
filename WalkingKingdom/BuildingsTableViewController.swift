@@ -20,7 +20,7 @@ class BuildingsTableViewController : UITableViewController {
         buildings.append(SmallHouse())
         buildings.append(LoggingCamp())
         buildings.append(Farm())
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     @IBAction func close(sender:AnyObject) {
@@ -41,7 +41,7 @@ class BuildingsTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
         var cellIdentifier = "BuildingCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as BuildingDescriptionCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! BuildingDescriptionCell
         
         var building:Building = buildings[indexPath.row]
         
@@ -61,10 +61,10 @@ class BuildingsTableViewController : UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         var building = self.buildings[indexPath.row]
-        var buildingClass = building.classForCoder as NSObject.Type
-        var newBuilding = buildingClass()
+        var buildingClass = building.classForCoder as! NSObject.Type
+        var newBuilding = buildingClass.init()
         
-        self.main?.buildABuilding(newBuilding as Building)
+        self.main?.buildABuilding(newBuilding as! Building)
         self.dismissViewControllerAnimated(true, completion: {})
     }
 }
@@ -86,7 +86,7 @@ class BuildingDescriptionCell : UITableViewCell {
         
         for (cost,amount) in buildingRequirement.buildingCost {
             
-            var label = viewWithTag(i) as UILabel
+            var label = viewWithTag(i) as! UILabel
             switch(cost) {
             
                 case "coin":

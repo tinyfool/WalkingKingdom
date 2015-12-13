@@ -49,12 +49,12 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         
         for building in game!.buildings {
             
-            var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
+            let buildingAnnation = BuildingAnnotation(coordinate:building.location!)
             buildingAnnation.building = building
             map?.addAnnotation(buildingAnnation)
         }
         
-        var gesture = UITapGestureRecognizer(target:self, action: (selector: "clickOnMap:"))
+        let gesture = UITapGestureRecognizer(target:self, action: (selector: "clickOnMap:"))
         map?.addGestureRecognizer(gesture)
         
         var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
@@ -67,8 +67,8 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             var theMap = map!
             for annotation in theMap.annotations {
             
-                var view = annotation.buildingView?
-                view?.updateStatus()
+//                var view = annotation.buildingView?
+//                view?.updateStatus()
             }
             updateInfoView()
         }
@@ -92,13 +92,13 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     @IBAction func clickOnMap(sender: AnyObject) {
         
-        var gesture:UITapGestureRecognizer = sender as UITapGestureRecognizer
-        var point = gesture.locationInView(gesture.view)
+        let gesture:UITapGestureRecognizer = sender as! UITapGestureRecognizer
+        let point = gesture.locationInView(gesture.view)
         
         if((map) != nil) {
-            var theMap:MKMapView = map!
+            let theMap:MKMapView = map!
             
-            var hitView = theMap.hitTest(point, withEvent: nil)
+            let hitView = theMap.hitTest(point, withEvent: nil)
             if(hitView!.isKindOfClass(MKAnnotationView)){
             
                 return
@@ -106,9 +106,9 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             
             location = theMap.convertPoint(point, toCoordinateFromView:map)
             self.annotation = MenuAnnotation(coordinate:location!)
-            theMap.addAnnotation(annotation)
+            theMap.addAnnotation(annotation!)
             
-            var menu = UIActionSheet(title: "build", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Build")
+            let menu = UIActionSheet(title: "build", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Build")
             menu.showInView(self.view)
         }else {
         
@@ -117,14 +117,14 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func buildABuilding(building:Building) {
     
-        var canBuild = game?.checkingBuildingPossible(building)
+        let canBuild = game?.checkingBuildingPossible(building)
         if(canBuild!) {
             
             building.location = location
             
             game?.buildABuilding(building)
             
-            var buildingAnnation = BuildingAnnotation(coordinate:building.location!)
+            let buildingAnnation = BuildingAnnotation(coordinate:building.location!)
             buildingAnnation.building = building
             map?.addAnnotation(buildingAnnation)
             
@@ -134,15 +134,15 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
     
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
 
-        map?.removeAnnotation(self.annotation)
+        map?.removeAnnotation(self.annotation!)
         
         if(buttonIndex != 0) {
             
             return
         }
         
-        var nav = self.storyboard!.instantiateViewControllerWithIdentifier("BuildingsTableViewController") as UINavigationController
-        var table = nav.topViewController as BuildingsTableViewController
+        var nav = self.storyboard!.instantiateViewControllerWithIdentifier("BuildingsTableViewController") as! UINavigationController
+        var table = nav.topViewController as! BuildingsTableViewController
         table.main = self
         self.presentViewController(nav , animated: true, completion: nil)
     }
@@ -169,11 +169,11 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         })
     }
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
         
         if (annotation.isKindOfClass(MKUserLocation)) {
         
-            var user = MKPinAnnotationView(annotation:annotation!, reuseIdentifier:"userlocation")
+            var user = MKPinAnnotationView(annotation:annotation, reuseIdentifier:"userlocation")
             return user
             
         } else if (annotation.isKindOfClass(MenuAnnotation)) {
@@ -184,7 +184,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
             
         } else if (annotation.isKindOfClass(BuildingAnnotation)) {
         
-            var buildingAnnotation = annotation as BuildingAnnotation
+            var buildingAnnotation = annotation as! BuildingAnnotation
             var building = buildingAnnotation.building
             var buildingAV = BuildingAnnotationView(
                     annotation:annotation,
@@ -201,7 +201,7 @@ class MainViewController: UIViewController,MKMapViewDelegate,UIActionSheetDelega
         return nil
     }
     
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
     
     
     }
@@ -227,7 +227,7 @@ class BuildingAnnotation:NSObject,MKAnnotation {
         
         self.coordinate  = coordinate
     }
-    var title: String! {
+    var title: String? {
     
         get {
             if((building) != nil) {

@@ -24,7 +24,7 @@ class CollecterViewController: UIViewController {
     var game:Game
 
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         game = Game.sharedGame()
         motionActivityMgr = CMMotionActivityManager()
@@ -44,8 +44,8 @@ class CollecterViewController: UIViewController {
             return
         }
         
-        var now = NSDate.date()
-        var zeroHour = Game.dayZeroOclock(now)
+        let now = NSDate()
+        let zeroHour = Game.dayZeroOclock(now)
         queryData(zeroHour,toDate:now)
     }
 
@@ -67,14 +67,14 @@ class CollecterViewController: UIViewController {
     
     @IBAction func close(sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true,{})
+        self.dismissViewControllerAnimated(true,completion: {})
     }
 
     
     
     func checkAuthorization() {
         
-        var now = NSDate.date()
+        let now = NSDate()
         pedometer?.queryPedometerDataFromDate(now, toDate: now, withHandler: {data, error in
             
             
@@ -101,10 +101,10 @@ class CollecterViewController: UIViewController {
                                 
                             }else {
                                 
-                                self.step = data.numberOfSteps.integerValue
+                                self.step = data!.numberOfSteps.integerValue
                                 dispatch_async(dispatch_get_main_queue(), {
                                     
-                                    NSLog("%@", data)
+                                    NSLog("%@", data!)
                                     self.loading!.hidden = true
                                     self.updateLabels()
                                     })
@@ -152,8 +152,8 @@ class CollecterViewController: UIViewController {
     
         self.CountingLabel!.text = "\(self.step) 👣"
         inforLabel!.text = "💰 \(game.coin) ⚡️ \(game.energy)"
-        var alreadyCollect = game.todayStepCollected()
-        var remainSteps = self.step - alreadyCollect
+        let alreadyCollect = game.todayStepCollected()
+        let remainSteps = self.step - alreadyCollect
         alreadyLabel!.text = "Already collect \(alreadyCollect) 👣"
         remainLabel!.text = "Reamin \(remainSteps) 👣"
     }

@@ -42,23 +42,23 @@ class Building:NSObject,NSCoding {
         aCoder.encodeInteger(buildCostTime, forKey: "buildCostTime")
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         buildTime = aDecoder.decodeObjectForKey("buildTime") as? NSDate
-        var tempimageName = aDecoder.decodeObjectForKey("imageName") as? String
+        let tempimageName = aDecoder.decodeObjectForKey("imageName") as? String
         if((tempimageName) != nil) {
         
             imageName = tempimageName!
         }
         
         radius = aDecoder.decodeIntegerForKey("radius")
-        var name1 = aDecoder.decodeObjectForKey("name") as? String
+        let name1 = aDecoder.decodeObjectForKey("name") as? String
         if((name1) != nil) {
 
             name = name1!
         }
-        var lat = aDecoder.decodeDoubleForKey("lat")
-        var long = aDecoder.decodeDoubleForKey("long")
+        let lat = aDecoder.decodeDoubleForKey("lat")
+        let long = aDecoder.decodeDoubleForKey("long")
         location = CLLocationCoordinate2DMake(lat, long)
         buildingRequirement = BuildingRequirement()
         
@@ -68,7 +68,7 @@ class Building:NSObject,NSCoding {
 
     override init(){
         
-        buildTime = NSDate.date()
+        buildTime = NSDate()
         buildingRequirement = BuildingRequirement()
         buildCostTime = 0
     }
@@ -102,11 +102,11 @@ class House:Building {
     
     override init() {
     
-        lastCollectTime = NSDate.date()
+        lastCollectTime = NSDate()
         super.init()
     }
     
-    required  init(coder aDecoder: NSCoder) {
+    required  init?(coder aDecoder: NSCoder) {
         
         lastCollectTime = aDecoder.decodeObjectForKey("lastCollectTime") as? NSDate
         super.init(coder:aDecoder)
@@ -122,7 +122,7 @@ class AuthorityBuilding:House {
     }
     
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }
@@ -135,7 +135,7 @@ class MaterialBuilding:Building {
     var working:Workplan?
     var startTime:NSDate?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
     }
@@ -158,7 +158,7 @@ class Workplan:NSObject,NSCoding {
         
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
     }
 }

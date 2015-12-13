@@ -46,20 +46,20 @@ class Game :NSObject,NSCoding {
             if(NSFileManager.defaultManager().fileExistsAtPath(url.path!)) {
                 
                 NSLog("%@", url)
-                var data = NSData.dataWithContentsOfURL(url, options: .DataReadingMappedIfSafe, error: nil)
-                NSLog("%@", data)
-                var object:AnyObject? =  NSKeyedUnarchiver.unarchiveObjectWithData(data)
+                var data = try? NSData(contentsOfURL: url, options: .DataReadingMappedIfSafe)
+                NSLog("%@", data!)
+                var object:AnyObject? =  NSKeyedUnarchiver.unarchiveObjectWithData(data!)
                 if((object) != nil) {
                     
                     Static.game = object! as? Game
                     if((Static.game) == nil) {
-                        Static.game = self()
+                        Static.game = self.init()
                     }
                 }else {
-                    Static.game = self()
+                    Static.game = self.init()
                 }
             }else {
-                Static.game = self()
+                Static.game = self.init()
             }
         }
 
@@ -96,9 +96,9 @@ class Game :NSObject,NSCoding {
         
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         
-        stepCollected = aDecoder.decodeObjectForKey("stepCollected") as Dictionary<NSDate,Int>
+        stepCollected = aDecoder.decodeObjectForKey("stepCollected") as! Dictionary<NSDate,Int>
         energy = aDecoder.decodeIntegerForKey("energy")
         
         coin = aDecoder.decodeIntegerForKey("coin")
@@ -118,7 +118,7 @@ class Game :NSObject,NSCoding {
         people = aDecoder.decodeIntegerForKey("people")
         usedPeople = aDecoder.decodeIntegerForKey("usedPeople")
         
-        buildings = aDecoder.decodeObjectForKey("buildings") as [Building]
+        buildings = aDecoder.decodeObjectForKey("buildings") as! [Building]
         
         NSLog("%@", buildings)
     }
@@ -131,13 +131,13 @@ class Game :NSObject,NSCoding {
     func todayStepCollected() ->Int {
     
         initStepCollectedTodayIfNeed()
-        var today = Game.dayZeroOclock(NSDate.date())
+        let today = Game.dayZeroOclock(NSDate())
         return stepCollected[today]!
     }
     
     func initStepCollectedTodayIfNeed() {
     
-        var today = Game.dayZeroOclock(NSDate.date())
+        let today = Game.dayZeroOclock(NSDate())
         if(stepCollected.indexForKey(today)==nil) {
             stepCollected[today] = 0
         }
@@ -145,12 +145,12 @@ class Game :NSObject,NSCoding {
     
     func collect2Coin(allStep:Int) {
     
-        var remainStep = allStep - todayStepCollected()
+        let remainStep = allStep - todayStepCollected()
         if(remainStep>=100) {
             
             coin += 10
             initStepCollectedTodayIfNeed()
-            var today = Game.dayZeroOclock(NSDate.date())
+            let today = Game.dayZeroOclock(NSDate())
             stepCollected[today] = stepCollected[today]! + 100
         }
         notifyChange()
@@ -158,12 +158,12 @@ class Game :NSObject,NSCoding {
     
     func collect2Energy(allStep:Int) {
         
-        var remainStep = allStep - todayStepCollected()
+        let remainStep = allStep - todayStepCollected()
         if(remainStep>=1000) {
             
             energy += 1
             initStepCollectedTodayIfNeed()
-            var today = Game.dayZeroOclock(NSDate.date())
+            let today = Game.dayZeroOclock(NSDate())
             stepCollected[today] = stepCollected[today]! + 1000
         }
         notifyChange()
@@ -171,7 +171,7 @@ class Game :NSObject,NSCoding {
     
     class func saveUrl() -> NSURL{
     
-        var fileMgr = NSFileManager.defaultManager()
+        let fileMgr = NSFileManager.defaultManager()
         var file = fileMgr.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         var url:NSURL = file[0] as NSURL
         url = url.URLByAppendingPathComponent("game.sav")
@@ -180,7 +180,7 @@ class Game :NSObject,NSCoding {
     
     func save() {
     
-        var data = NSKeyedArchiver.archivedDataWithRootObject(self)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(self)
         data.writeToURL(Game.saveUrl(), atomically: true)
     }
     
@@ -188,13 +188,13 @@ class Game :NSObject,NSCoding {
     class func dayZeroOclock(date: NSDate) -> NSDate{
         
         var calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
-        calendar.timeZone = NSTimeZone.localTimeZone()
-        let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        var dateComponents = calendar.components(flags, fromDate: date)
+        calendar!.timeZone = NSTimeZone.localTimeZone()
+        let flags: NSCalendarUnit = [.NSDayCalendarUnit, .NSMonthCalendarUnit, .NSYearCalendarUnit]
+        var dateComponents = calendar!.components(flags, fromDate: date)
         dateComponents.hour = 0
         dateComponents.minute = 0
         dateComponents.second = 0
-        var zeroDate = calendar.dateFromComponents(dateComponents)
+        var zeroDate = calendar!.dateFromComponents(dateComponents)
         return zeroDate!
     }
     
@@ -219,7 +219,7 @@ class Game :NSObject,NSCoding {
             }
         }
         
-        var br = building.buildingRequirement
+        let br = building.buildingRequirement
         
         if(br.needPeople > people - usedPeople) {
         
@@ -305,7 +305,7 @@ class Game :NSObject,NSCoding {
     
     func makeBuildingCost(building:Building) -> Bool {
         
-        var br = building.buildingRequirement
+        let br = building.buildingRequirement
         self.usedPeople += br.needPeople
         self.exp += br.exp
         building.buildCostTime = building.buildingRequirement.buildCostTime
@@ -350,7 +350,7 @@ class Game :NSObject,NSCoding {
     
         var alert = UIAlertView(
             title: "You can't build!",
-            message: message,
+            message: message as String,
             delegate: nil,
             cancelButtonTitle: "Ok")
         alert.show()

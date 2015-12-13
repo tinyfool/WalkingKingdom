@@ -191,6 +191,8 @@
 		BDAAFAC11967B05900F627EF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "pei hao";
 				TargetAttributes = {

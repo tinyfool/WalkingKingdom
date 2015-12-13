@@ -15,7 +15,7 @@ class BuildingAnnotationView : MKAnnotationView {
     var building:Building?
     var buildingLabel:UILabel
     
-    override init(annotation: MKAnnotation!, reuseIdentifier: String!) {
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         
         buildingLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
 
@@ -34,7 +34,7 @@ class BuildingAnnotationView : MKAnnotationView {
         super.init(frame:frame)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -43,15 +43,15 @@ class BuildingAnnotationView : MKAnnotationView {
     
         if((building) != nil){
         
-            var theBuilding = building!
-            var game = Game.sharedGame()
+            let theBuilding = building!
+            let game = Game.sharedGame()
             if(theBuilding.complete==0) {
                 
                 NSLog("%d", theBuilding.buildCostTime)
                 buildingLabel.hidden = false
-                var timeDiff = theBuilding.buildTime?.timeIntervalSinceNow
+                let timeDiff = theBuilding.buildTime?.timeIntervalSinceNow
                 NSLog("%d", Int(timeDiff!))
-                var remainTime = theBuilding.buildCostTime + Int(timeDiff!)
+                let remainTime = theBuilding.buildCostTime + Int(timeDiff!)
                 buildingLabel.text = "still need \(remainTime) second!"
                 if(remainTime<0) {
                     
